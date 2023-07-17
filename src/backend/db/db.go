@@ -23,15 +23,9 @@ func init() {
 		"host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
 		DATABASE_HOST, DATABASE_PORT, DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME,
 	)
-
-	DB, err := sql.Open("postgres", connString)
+	var err error
+	DB, err = sql.Open("postgres", connString)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Database open connection error: %s", err)
 	}
-
-	defer func() {
-		if err := DB.Close(); err == nil {
-			log.Fatalf("Database connection close error: %s", err)
-		}
-	}()
 }
