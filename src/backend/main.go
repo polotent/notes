@@ -25,8 +25,8 @@ func main() {
 
 	ginRouter := router.NewGinRouter()
 	server := server.NewServer(ginRouter, noteController)
-	server.Init()
-	if err := server.Serve("8080"); err != nil {
+	server.Setup()
+	if err := server.Run("8080"); err != nil {
 		log.Fatalf("Server launch failed: %s", err)
 	}
 }

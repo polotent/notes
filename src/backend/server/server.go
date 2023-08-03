@@ -6,8 +6,8 @@ import (
 )
 
 type Server interface {
-	Init()
-	Serve(port string) error
+	Setup()
+	Run(port string) error
 }
 
 type server struct {
@@ -15,16 +15,16 @@ type server struct {
 	noteController controller.NoteController
 }
 
-func (appRouter *server) Init() {
-	appRouter.setNoteRoutes()
+func (server *server) Setup() {
+	server.setNoteRoutes()
 }
 
-func (appRouter *server) Serve(port string) error {
-	return appRouter.router.Serve(port)
+func (server *server) Run(port string) error {
+	return server.router.Serve(port)
 }
 
-func (appRouter *server) setNoteRoutes() {
-	appRouter.router.GET("/api/notes", appRouter.noteController.ReadAllNotes)
+func (server *server) setNoteRoutes() {
+	server.router.GET("/api/notes", server.noteController.ReadAllNotes)
 }
 
 func NewServer(router router.Router, noteController controller.NoteController) Server {
