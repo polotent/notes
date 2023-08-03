@@ -1,21 +1,22 @@
-package router
+package server
 
 import (
 	"backend/controller"
+	"backend/router"
 )
 
 type Server interface {
 	Init()
-	Serve(port string) error 
+	Serve(port string) error
 }
 
-type server struct{
-	router Router
+type server struct {
+	router         router.Router
 	noteController controller.NoteController
 }
 
 func (appRouter *server) Init() {
-	appRouter.setNoteRoutes();
+	appRouter.setNoteRoutes()
 }
 
 func (appRouter *server) Serve(port string) error {
@@ -26,9 +27,9 @@ func (appRouter *server) setNoteRoutes() {
 	appRouter.router.GET("/api/notes", appRouter.noteController.ReadAllNotes)
 }
 
-func NewServer(router Router, noteController controller.NoteController) Server {
+func NewServer(router router.Router, noteController controller.NoteController) Server {
 	return &server{
-		router: router,
+		router:         router,
 		noteController: noteController,
 	}
 }

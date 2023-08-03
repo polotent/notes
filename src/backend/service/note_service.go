@@ -21,4 +21,4 @@ func NewNoteService(nr repository.NoteRepository) NoteService {
 	return &noteService{
 		noteRepository: nr,
 	}
-} 
+}
