@@ -7,7 +7,6 @@ import (
 	"backend/service"
 	"backend/repository"
 	"backend/db"
-	"github.com/gin-gonic/gin"
 )
 
 var (
@@ -23,22 +22,10 @@ func main() {
 		}
 	}()
 
-	ginDispatcher := gin.New()
-	router := router.NewGinRouter(ginDispatcher)
-	router.GET("/api/notes", noteController.ReadAllNotes)
-	// router.POST("api/notes", noteController.CreateNote)
-
-	if err := router.Serve("8080"); err != nil {
+	ginRouter := router.NewGinRouter()
+	server := router.NewServer(ginRouter, noteController)
+	server.Init()
+	if err := server.Serve("8080"); err != nil {
 		log.Fatalf("Server launch failed: %s", err)
 	}
-	// mux := http.NewServeMux()
-	// router.Init(mux)
-	// server := &http.Server{
-	// 	Addr: "localhost:8080",
-	// 	Handler: mux,
-	// }
-
-	// if err := server.ListenAndServe(); err != nil {
-	// 	log.Fatalf("Server launch failed: %s", err)
-	// }
 }
