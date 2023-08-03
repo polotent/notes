@@ -1,9 +1,11 @@
 package repository
 
 import (
-	"log"
+	"backend/db"
 	"backend/domain"
 	"database/sql"
+	"errors"
+	"log"
 )
 
 type NoteRepository interface {
@@ -18,32 +20,35 @@ func (nr *noteRepository) ReadAllNotes() ([]*domain.Note, error) {
 	var notes []*domain.Note
 	rows, err := nr.db.Query("SELECT * FROM notes")
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
+		return nil, errors.New("Error executing query")
 	}
 
 	defer func() {
 		if err := rows.Close(); err != nil {
-			log.Fatal(err)
+			log.Println(err)
 		}
 	}()
 
 	var note domain.Note
 	for rows.Next() {
 		if err := rows.Scan(&note.Id, &note.Title, &note.Description); err != nil {
-			log.Fatal(err)
+			log.Println(err)
+			return nil, errors.New("Error reading table rows")
 		}
 		notes = append(notes, &note)
 	}
 
 	if err := rows.Err(); err != nil {
-		log.Fatal(err)
+		log.Println(err)
+		return nil, errors.New("Error reading table rows")
 	}
 
 	return notes, nil
 }
 
-func NewNoteRepository(db *sql.DB) NoteRepository {
+func NewNoteRepository() NoteRepository {
 	return &noteRepository{
-		db: db,
+		db: db.DB,
 	}
 }
