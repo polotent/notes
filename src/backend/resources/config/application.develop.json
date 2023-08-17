@@ -1,0 +1,13 @@
+{
+    "database": {
+		"Dialect": "postgres",
+		"Host": "localhost",
+		"Port": "5432",
+		"DBname": "notes",
+		"Username": "jkr",
+		"Password": "jkr"
+	},
+    "server": {
+        "port": "8080"
+    }
+}

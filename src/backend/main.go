@@ -1,6 +1,7 @@
 package main
 
 import (
+	"backend/config"
 	"backend/controller"
 	"backend/db"
 	"backend/repository"
@@ -8,6 +9,7 @@ import (
 	"backend/server"
 	"backend/service"
 	"log"
+	"fmt"
 )
 
 var (
@@ -17,6 +19,9 @@ var (
 )
 
 func main() {
+	conf, env := config.LoadAppConfig()
+	fmt.Println(conf, env)
+
 	defer func() {
 		if err := db.DB.Close(); err != nil {
 			log.Fatalf("Database connection close failed: %s", err)
