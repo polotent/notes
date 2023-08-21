@@ -1,10 +1,11 @@
 package controller
 
 import (
-	"backend/errors"
-	"backend/service"
 	"encoding/json"
 	"net/http"
+
+	"github.com/polotent/notes/src/backend/internal/app/notes/errors"
+	"github.com/polotent/notes/src/backend/internal/app/notes/service"
 )
 
 type NoteController interface {

@@ -1,8 +1,8 @@
 package service
 
 import (
-	"backend/domain"
-	"backend/repository"
+	"github.com/polotent/notes/src/backend/internal/app/notes/domain"
+	"github.com/polotent/notes/src/backend/internal/app/notes/repository"
 )
 
 type NoteService interface {

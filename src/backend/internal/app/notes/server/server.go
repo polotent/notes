@@ -1,8 +1,8 @@
 package server
 
 import (
-	"backend/controller"
-	"backend/router"
+	"github.com/polotent/notes/src/backend/internal/app/notes/controller"
+	"github.com/polotent/notes/src/backend/internal/app/notes/router"
 )
 
 type Server interface {

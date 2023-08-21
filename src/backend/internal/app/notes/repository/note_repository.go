@@ -1,11 +1,11 @@
 package repository
 
 import (
-	"backend/db"
-	"backend/domain"
 	"database/sql"
 	"errors"
 	"log"
+
+	"github.com/polotent/notes/src/backend/internal/app/notes/domain"
 )
 
 type NoteRepository interface {
@@ -47,8 +47,8 @@ func (nr *noteRepository) ReadAllNotes() ([]*domain.Note, error) {
 	return notes, nil
 }
 
-func NewNoteRepository() NoteRepository {
+func NewNoteRepository(db *sql.DB) NoteRepository {
 	return &noteRepository{
-		db: db.DB,
+		db: db,
 	}
 }

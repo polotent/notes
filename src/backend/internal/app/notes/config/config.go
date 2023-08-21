@@ -4,16 +4,16 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"os"
 	"io"
+	"os"
 )
 
 type Config struct {
 	Database struct {
-		Dialect string
-		Host string
-		Port string
-		DBname string
+		Dialect  string
+		Host     string
+		Port     string
+		DBname   string
 		Username string
 		Password string
 	}
@@ -24,7 +24,7 @@ type Config struct {
 }
 
 var (
-	AppConfigPath = "resources/config/application.%s.json"
+	AppConfigPath = "../../internal/app/notes/resources/config/application.%s.json"
 )
 
 func LoadAppConfig() (*Config, string) {
@@ -35,7 +35,7 @@ func LoadAppConfig() (*Config, string) {
 		env = flag.String("env", "develop", "To switch configurations.")
 	}
 
-	jsonFilePath := fmt.Sprintf(AppConfigPath, *env) 
+	jsonFilePath := fmt.Sprintf(AppConfigPath, *env)
 	jsonFile, err := os.Open(jsonFilePath)
 	if err != nil {
 		fmt.Printf("Error while opening file for reading at %s", jsonFilePath)
@@ -46,7 +46,7 @@ func LoadAppConfig() (*Config, string) {
 
 	config := &Config{}
 
-	byteValue, err := io.ReadAll(jsonFile);
+	byteValue, err := io.ReadAll(jsonFile)
 	if err != nil {
 		fmt.Printf("Error while reading file content at %s", jsonFilePath)
 		os.Exit(2)

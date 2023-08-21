@@ -1,5 +1,5 @@
 {
-    "database": {
+	"database": {
 		"Dialect": "postgres",
 		"Host": "localhost",
 		"Port": "5432",
@@ -7,7 +7,7 @@
 		"Username": "jkr",
 		"Password": "jkr"
 	},
-    "server": {
-        "port": "8080"
-    }
+	"server": {
+		"port": "8080"
+	}
 }
